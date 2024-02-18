@@ -32,6 +32,8 @@ def go(args):
     idx = df['price'].between(float(args.min_price), float(args.max_price))
     df = df[idx].copy()
     df['last_review'] = pd.to_datetime(df['last_review'])
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
     # TODO: add code to fix the issue happened when testing the model
     
 
@@ -45,8 +47,7 @@ def go(args):
     )
     artifact.add_file('clean_sample.csv')
     run.log_artifact(artifact)
-    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
-    df = df[idx].copy()
+
 # TODO: In the code below, fill in the data type for each argumemt. The data type should be str, float or int. 
 # TODO: In the code below, fill in a description for each argument. The description should be a string.
 if __name__ == "__main__":
